@@ -1,0 +1,5 @@
+# Created at 2025-05-30T19:23:06.155
+Boot Manifest-JAR contains absolute paths in classpath 'H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
