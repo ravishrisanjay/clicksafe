@@ -13,6 +13,12 @@ import Login from './components/Login';
 import RequireAuth from './components/RequireAuth';
 import { AuthProvider } from './components/AuthContext'; // correct relative path
 import NetflixLogin from './components/netflixlogin';
+import Facebook from './components/Facebook'; // correct relative path
+import Instagram from './components/instagram'; // correct relative path
+import Google from './facklogin/google';
+import Amazon from './facklogin/Amazon';
+import AwarenessPage from './components/AwarenessPage'; // ← Added AwarenessPage import
+
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -22,14 +28,21 @@ createRoot(document.getElementById('root')).render(
             <Route index element={<Home />} />
             <Route path="learn" element={<Learn />} />
             <Route path="about" element={<About />} />
-            <Route path="profile" element={<RequireAuth><Profile /></RequireAuth>} />
-            <Route path="attack-simulation" element={<RequireAuth><AttackSimulation /></RequireAuth>} />
+            <Route path="profile" element={<Profile />} />
+            {/* <Route path="profile" element={<RequireAuth><Profile /></RequireAuth>} /> */}
+            <Route path="profile" element={<Profile />} />
+            {/* <Route path="attack-simulation" element={<RequireAuth><AttackSimulation /></RequireAuth>} /> */}
+            <Route path="attack-simulation" element={<AttackSimulation />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/netflix-login" element={<NetflixLogin/>} />
-            {/* <Route path='/awareness' element={<warness/}></Route> */}
           </Route>
+          <Route path="/netflix-login" element={<NetflixLogin/>} />
+          <Route path="/facebook" element={<Facebook/>} />
+          <Route path="/Instagram" element={<Instagram/>} />
+          <Route path="/Google" element={<Google/>} />
+          <Route path="/Amazon" element={<Amazon/>} />
+          <Route path="/awareness" element={<AwarenessPage/>} /> {/* ← Added AwarenessPage route */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>

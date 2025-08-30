@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,12 +17,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.http.HttpMethod;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
+@EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
@@ -31,16 +33,39 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
-            .cors(withDefaults()) // ✅ modern way for Spring Security 6.1+
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**", "/api/users/register").permitAll()
-                .anyRequest().authenticated()
+                // 🔥 CRITICAL: Allow OPTIONS requests for CORS preflight (MUST BE FIRST)
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                
+                // 🔥 PUBLIC ENDPOINTS - No authentication required (ORDER MATTERS!)
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/users/register").permitAll()
+                
+                // 🔥 FIXED: Multiple ways to ensure click endpoint is public
+                .requestMatchers("/api/awareness-links/click").permitAll()              // Any method
+                .requestMatchers(HttpMethod.POST, "/api/awareness-links/click").permitAll() // Specific POST
+                
+                .requestMatchers("/awareness/**").permitAll()
+                .requestMatchers("/simulation/**").permitAll()
+                .requestMatchers("/link-expired", "/link-not-found").permitAll()
+                .requestMatchers("/favicon.ico", "/robots.txt").permitAll()
+                .requestMatchers("/error").permitAll()  // Added error page
+                
+                // 🔥 PROTECTED ENDPOINTS - Authentication required
+                .requestMatchers("/api/awareness-links/generate").authenticated()
+                .requestMatchers("/api/awareness-links/my-links").authenticated()
+                .requestMatchers("/api/user/**").authenticated()
+                
+                // 🔥 FIXED: Change this to permitAll() for debugging, then back to authenticated()
+                .anyRequest().permitAll()  // 🚨 TEMPORARILY ALLOW ALL - CHANGE BACK TO authenticated() LATER
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             );
 
+        // Add JWT filter
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -57,17 +82,26 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ CORS Configuration Source Bean (used by Spring Security)
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true); // Important if you send cookies or auth headers
+        CorsConfiguration configuration = new CorsConfiguration();
+        
+        // 🔥 FIXED: More permissive CORS for debugging
+        configuration.setAllowedOriginPatterns(Arrays.asList("*")); // Very permissive for debugging
+        
+        configuration.setAllowedMethods(Arrays.asList(
+            "GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"
+        ));
+        
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        
+        configuration.setExposedHeaders(Arrays.asList(
+            "Authorization", "Content-Type", "X-Requested-With"
+        ));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }

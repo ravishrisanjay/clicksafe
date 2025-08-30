@@ -3,6 +3,7 @@ package com.phishing.main.entitys;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +19,10 @@ public class User implements Serializable {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference  // 👈 Prevents infinite recursion
     private UserProfile profile;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<AwarenessLink> awarenessLinks;
 
     // Getters and Setters
     public Long getId() {
@@ -53,5 +58,13 @@ public class User implements Serializable {
         if (profile != null) {
             profile.setUser(this); // Ensure bidirectional linkage
         }
+    }
+
+    public List<AwarenessLink> getAwarenessLinks() {
+        return awarenessLinks;
+    }
+
+    public void setAwarenessLinks(List<AwarenessLink> awarenessLinks) {
+        this.awarenessLinks = awarenessLinks;
     }
 }
