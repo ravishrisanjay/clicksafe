@@ -1,0 +1,11 @@
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\config\SecurityConfig.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\controller\AuthController.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\controller\loginctl.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\entitys\User.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\PhishingApplication.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\repo\UserRepo.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\security\CustomUserDetailsService.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\security\JwtRequestFilter.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\security\JwtUtil.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\security\models\AuthRequest.java
+H:\spring boot\phishing project\self create phishing project\phishing backend\phishing\src\main\java\com\phishing\main\security\models\AuthResponse.java
