@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from 'react';
-=======
-import React, { useState, useEffect } from 'react';
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import amazonlogo from '../assets/amazonlogo.png';
 
@@ -13,12 +9,9 @@ export default function Amazon() {
   const [clickRecorded, setClickRecorded] = useState(false);
   const [error, setError] = useState(null);
   
-<<<<<<< HEAD
   // Ref to prevent double-firing in React Strict Mode
   const effectRan = useRef(false);
 
-=======
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   
@@ -26,7 +19,6 @@ export default function Amazon() {
 
   // Record click when component mounts (if token exists)
   useEffect(() => {
-<<<<<<< HEAD
     // 🛑 GUARD CLAUSE: If this effect already ran, stop here.
     if (effectRan.current === true) {
         return;
@@ -36,9 +28,6 @@ export default function Amazon() {
       // Mark that we have started the request
       effectRan.current = true;
 
-=======
-    const recordClick = async () => {
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
       // If no token, just show the fake page without recording click
       if (!token) {
         console.log('No token found, showing fake page without recording click');
@@ -48,13 +37,7 @@ export default function Amazon() {
 
       try {
         console.log('Recording click for token:', token);
-<<<<<<< HEAD
         
-=======
-        console.log('Making request to: http://localhost:8080/api/awareness-links/click');
-        
-        // 🔥 FIXED: Use correct backend URL
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         const response = await fetch('http://localhost:8080/api/awareness-links/click', {
           method: 'POST',
           headers: {
@@ -63,12 +46,6 @@ export default function Amazon() {
           body: JSON.stringify({ token })
         });
 
-<<<<<<< HEAD
-=======
-        console.log('Response status:', response.status);
-        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         if (!response.ok) {
           const errorText = await response.text();
           console.error('API Error Response:', errorText);
@@ -76,20 +53,12 @@ export default function Amazon() {
         }
 
         const data = await response.json();
-<<<<<<< HEAD
-=======
-        console.log('API Success Response:', data);
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         
         if (data.success) {
           console.log('Click recorded successfully');
           setClickRecorded(true);
         } else {
           console.log('Click recording failed:', data.message);
-<<<<<<< HEAD
-=======
-          // Handle different failure scenarios but still show fake page
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
           if (data.message?.includes('expired')) {
             setError('This link has expired, but you can still see the demo.');
           } else if (data.message?.includes('not found')) {
@@ -107,33 +76,16 @@ export default function Amazon() {
     };
 
     recordClick();
-<<<<<<< HEAD
-    
-    // Cleanup function not needed for this specific logic, 
-    // but good practice to reset if component unmounts in specific ways.
-    return () => {
-        // usually we don't reset effectRan here for 'mount only' effects
-    };
-=======
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   }, [token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-<<<<<<< HEAD
-=======
-    // Validate form inputs
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
     if (!email.trim() || !password.trim()) {
       alert('Please enter both email and password');
       return;
     }
 
-<<<<<<< HEAD
-=======
-    // After user submits credentials, redirect to awareness education page
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
     navigate('/awareness', { 
       state: { 
         platform: 'amazon',
@@ -144,46 +96,24 @@ export default function Amazon() {
     });
   };
 
-<<<<<<< HEAD
-=======
-  // Show loading state while recording click
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   if (loading) {
     return (
       <div style={styles.loading}>
         <div style={styles.spinner}></div>
         <p>Loading Amazon Sign In...</p>
-<<<<<<< HEAD
-=======
-        <p style={{ fontSize: '12px', color: '#666' }}>
-          Debug: Token = {token ? 'Present' : 'Missing'}
-        </p>
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
       </div>
     );
   }
 
-<<<<<<< HEAD
-  // ... (Rest of your return JSX remains exactly the same as your original file)
   return (
     <div style={styles.container}>
       <div style={styles.loginBox}>
-=======
-  return (
-    <div style={styles.container}>
-      <div style={styles.loginBox}>
-        {/* Show error message if any, but don't redirect */}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         {error && (
           <div style={styles.errorBanner}>
             <p>{error}</p>
           </div>
         )}
 
-<<<<<<< HEAD
-=======
-        {/* Amazon Logo with .in */}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         <div style={styles.logoContainer}>
           <div style={styles.logoWrapper}>
             <img 
@@ -195,10 +125,6 @@ export default function Amazon() {
           </div>
         </div>
 
-<<<<<<< HEAD
-=======
-        {/* Sign In Form */}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         <form onSubmit={handleSubmit} style={styles.form}>
           <h1 style={styles.title}>Sign in</h1>
           
@@ -262,10 +188,6 @@ export default function Amazon() {
           </div>
         </form>
 
-<<<<<<< HEAD
-=======
-        {/* Additional Options */}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         <div style={styles.divider}>
           <span style={styles.dividerText}>New to Amazon?</span>
         </div>
@@ -285,10 +207,6 @@ export default function Amazon() {
           Create your Amazon account
         </button>
 
-<<<<<<< HEAD
-=======
-        {/* Footer */}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         <div style={styles.footer}>
           <div style={styles.footerDivider}></div>
           <div style={styles.footerLinks}>
@@ -309,10 +227,6 @@ export default function Amazon() {
   );
 }
 
-<<<<<<< HEAD
-// ... (Your existing styles object remains exactly the same)
-=======
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 const styles = {
   container: {
     minHeight: '100vh',
@@ -525,10 +439,6 @@ const styles = {
   },
 };
 
-<<<<<<< HEAD
-=======
-// Add CSS animation for spinner
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 const styleSheet = document.createElement('style');
 styleSheet.innerHTML = `
   @keyframes spin {
@@ -536,8 +446,4 @@ styleSheet.innerHTML = `
     100% { transform: rotate(360deg); }
   }
 `;
-<<<<<<< HEAD
 document.head.appendChild(styleSheet);
-=======
-document.head.appendChild(styleSheet);
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c

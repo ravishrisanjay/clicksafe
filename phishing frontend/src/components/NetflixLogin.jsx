@@ -1,26 +1,14 @@
-<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-// Make sure this path is correct for your project structure
-import background from '../assets/background.jpg'; 
-=======
-import React, { useState } from "react";
-
-// ✅ Top of your file (if not already done)
 import background from '../assets/background.jpg';
-
-
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 
 const NetflixLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-<<<<<<< HEAD
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Ref to prevent double-firing in React Strict Mode (Same fix as Amazon)
+  
+  // Ref to prevent double-firing in React Strict Mode
   const effectRan = useRef(false);
 
   const [searchParams] = useSearchParams();
@@ -34,8 +22,8 @@ const NetflixLogin = () => {
     const recordClick = async () => {
       effectRan.current = true; // Mark as ran
 
+      // If no token, stop loading and show page
       if (!token) {
-        console.log('No token found, showing fake page without recording click');
         setLoading(false);
         return;
       }
@@ -43,22 +31,15 @@ const NetflixLogin = () => {
       try {
         console.log('Recording click for Netflix token:', token);
         
-        const response = await fetch('http://localhost:8080/api/awareness-links/click', {
+        await fetch('http://localhost:8080/api/awareness-links/click', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token })
         });
 
-        if (!response.ok) {
-          throw new Error('Failed to record click');
-        }
-        
-        const data = await response.json();
-        console.log('Click recording result:', data);
-
+        console.log('Click recorded successfully');
       } catch (err) {
         console.error('Error recording click:', err);
-        // We don't block the UI on error, we just log it
       } finally {
         setLoading(false);
       }
@@ -103,14 +84,6 @@ const NetflixLogin = () => {
       );
   }
 
-=======
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Sign in:", { email, password, rememberMe });
-  };
-
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   return (
     <div
       style={{
@@ -121,7 +94,6 @@ const NetflixLogin = () => {
         fontFamily: "Arial, sans-serif",
       }}
     >
-<<<<<<< HEAD
       {/* Background image */}
       <div
         style={{
@@ -138,25 +110,6 @@ const NetflixLogin = () => {
           filter: "brightness(0.5)",
         }}
       ></div>
-=======
-     {/* Background image */}
-<div
-  style={{
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 0,
-    backgroundImage: `url(${background})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    filter: "brightness(0.5)", // Optional: dim the background
-  }}
-></div>
-
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 
       {/* Dark overlay */}
       <div
@@ -183,16 +136,10 @@ const NetflixLogin = () => {
         <div
           style={{
             color: "#e50914",
-<<<<<<< HEAD
             fontSize: "40px",
             fontWeight: "bold",
             letterSpacing: "2px",
             textShadow: "2px 2px 4px rgba(0,0,0,0.5)"
-=======
-            fontSize: "30px",
-            fontWeight: "bold",
-            letterSpacing: "2px",
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
           }}
         >
           NETFLIX
@@ -211,48 +158,29 @@ const NetflixLogin = () => {
           padding: "16px",
         }}
       >
-<<<<<<< HEAD
         <div style={{ width: "100%", maxWidth: "450px" }}>
-=======
-        <div style={{ width: "100%", maxWidth: "400px" }}>
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
           {/* Sign In Form */}
           <div
             style={{
               backgroundColor: "rgba(0, 0, 0, 0.75)",
-<<<<<<< HEAD
               borderRadius: "4px",
               padding: "60px 68px 40px",
               minHeight: "660px"
-=======
-              borderRadius: "8px",
-              padding: "48px",
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
             }}
           >
             <h1
               style={{
                 color: "white",
                 fontSize: "32px",
-<<<<<<< HEAD
                 fontWeight: "700",
                 marginBottom: "28px",
-=======
-                fontWeight: "600",
-                marginBottom: "32px",
-                margin: "0 0 32px 0",
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
               }}
             >
               Sign In
             </h1>
 
             <form onSubmit={handleSubmit}>
-<<<<<<< HEAD
               {/* Email Input */}
-=======
-              {/* Email or mobile number input */}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
               <div style={{ marginBottom: "16px" }}>
                 <input
                   type="text"
@@ -261,25 +189,16 @@ const NetflixLogin = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   style={{
                     width: "100%",
-<<<<<<< HEAD
                     height: "50px",
                     padding: "16px 20px",
                     backgroundColor: "#333",
                     border: "none",
                     borderRadius: "4px",
-=======
-                    height: "56px",
-                    padding: "16px",
-                    backgroundColor: "#333",
-                    border: "1px solid #666",
-                    borderRadius: "6px",
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
                     color: "white",
                     fontSize: "16px",
                     outline: "none",
                     boxSizing: "border-box",
                   }}
-<<<<<<< HEAD
                   onFocus={(e) => e.target.style.backgroundColor = "#454545"}
                   onBlur={(e) => e.target.style.backgroundColor = "#333"}
                 />
@@ -287,21 +206,6 @@ const NetflixLogin = () => {
 
               {/* Password Input */}
               <div style={{ marginBottom: "40px" }}>
-=======
-                  onFocus={(e) => {
-                    e.target.style.backgroundColor = "#555";
-                    e.target.style.borderColor = "white";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.backgroundColor = "#333";
-                    e.target.style.borderColor = "#666";
-                  }}
-                />
-              </div>
-
-              {/* Password input */}
-              <div style={{ marginBottom: "24px" }}>
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
                 <input
                   type="password"
                   placeholder="Password"
@@ -309,37 +213,18 @@ const NetflixLogin = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   style={{
                     width: "100%",
-<<<<<<< HEAD
                     height: "50px",
                     padding: "16px 20px",
                     backgroundColor: "#333",
                     border: "none",
                     borderRadius: "4px",
-=======
-                    height: "56px",
-                    padding: "16px",
-                    backgroundColor: "#333",
-                    border: "1px solid #666",
-                    borderRadius: "6px",
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
                     color: "white",
                     fontSize: "16px",
                     outline: "none",
                     boxSizing: "border-box",
                   }}
-<<<<<<< HEAD
                   onFocus={(e) => e.target.style.backgroundColor = "#454545"}
                   onBlur={(e) => e.target.style.backgroundColor = "#333"}
-=======
-                  onFocus={(e) => {
-                    e.target.style.backgroundColor = "#555";
-                    e.target.style.borderColor = "white";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.backgroundColor = "#333";
-                    e.target.style.borderColor = "#666";
-                  }}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
                 />
               </div>
 
@@ -351,57 +236,18 @@ const NetflixLogin = () => {
                   height: "48px",
                   backgroundColor: "#e50914",
                   border: "none",
-<<<<<<< HEAD
                   borderRadius: "4px",
                   color: "white",
                   fontSize: "16px",
                   fontWeight: "700",
                   cursor: "pointer",
-                  marginTop: "24px",
+                  marginTop: "10px",
                   marginBottom: "12px",
                 }}
-=======
-                  borderRadius: "6px",
-                  color: "white",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  cursor: "pointer",
-                  marginBottom: "16px",
-                }}
-                onMouseOver={(e) =>
-                  (e.target.style.backgroundColor = "#f40612")
-                }
-                onMouseOut={(e) => (e.target.style.backgroundColor = "#e50914")}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
               >
                 Sign In
               </button>
 
-<<<<<<< HEAD
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: "#b3b3b3" }}>
-                 <div>
-                    <input 
-                        type="checkbox" 
-                        id="remember" 
-                        checked={rememberMe}
-                        onChange={(e) => setRememberMe(e.target.checked)}
-                        style={{ marginRight: "5px" }}
-                    />
-                    <label htmlFor="remember">Remember me</label>
-                 </div>
-                 <a href="#" onClick={e => e.preventDefault()} style={{ color: "#b3b3b3", textDecoration: "none" }}>Need help?</a>
-              </div>
-            </form>
-
-            <div style={{ marginTop: "100px", color: "#737373", fontSize: "16px" }}>
-                New to Netflix? <a href="#" onClick={e => e.preventDefault()} style={{ color: "white", textDecoration: "none" }}>Sign up now</a>.
-            </div>
-            
-            <div style={{ marginTop: "20px", fontSize: "13px", color: "#8c8c8c" }}>
-               This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#" style={{ color: "#0071eb", textDecoration: "none" }}>Learn more</a>.
-            </div>
-
-=======
               {/* OR divider */}
               <div
                 style={{
@@ -417,111 +263,45 @@ const NetflixLogin = () => {
               {/* Use a sign-in code button */}
               <button
                 type="button"
+                onClick={() => alert("This is a simulation. Just click Sign In.")}
                 style={{
                   width: "100%",
-                  height: "48px",
-                  backgroundColor: "#333",
+                  height: "40px",
+                  backgroundColor: "rgba(128,128,128,0.2)",
                   border: "none",
-                  borderRadius: "6px",
+                  borderRadius: "4px",
                   color: "white",
-                  fontSize: "16px",
+                  fontSize: "14px",
                   cursor: "pointer",
                   marginBottom: "16px",
                 }}
-                onMouseOver={(e) => (e.target.style.backgroundColor = "#555")}
-                onMouseOut={(e) => (e.target.style.backgroundColor = "#333")}
               >
                 Use a sign-in code
               </button>
 
-              {/* Forgot password */}
-              <div style={{ textAlign: "center", marginBottom: "24px" }}>
-                <a
-                  href="#"
-                  style={{
-                    color: "white",
-                    textDecoration: "none",
-                    fontSize: "14px",
-                  }}
-                  onMouseOver={(e) =>
-                    (e.target.style.textDecoration = "underline")
-                  }
-                  onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-                >
-                  Forgot password?
-                </a>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: "#b3b3b3", marginTop: "10px" }}>
+                 <div>
+                    <input 
+                        type="checkbox" 
+                        id="remember" 
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                        style={{ marginRight: "5px" }}
+                    />
+                    <label htmlFor="remember">Remember me</label>
+                 </div>
+                 <a href="#" onClick={e => e.preventDefault()} style={{ color: "#b3b3b3", textDecoration: "none" }}>Need help?</a>
               </div>
             </form>
 
-            {/* Remember me checkbox */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "32px",
-              }}
-            >
-              <input
-                type="checkbox"
-                id="remember"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                style={{
-                  marginRight: "8px",
-                  width: "16px",
-                  height: "16px",
-                }}
-              />
-              <label
-                htmlFor="remember"
-                style={{
-                  color: "#999",
-                  fontSize: "14px",
-                  cursor: "pointer",
-                }}
-              >
-                Remember me
-              </label>
+            <div style={{ marginTop: "40px", color: "#737373", fontSize: "16px" }}>
+                New to Netflix? <a href="#" onClick={e => e.preventDefault()} style={{ color: "white", textDecoration: "none" }}>Sign up now</a>.
+            </div>
+            
+            <div style={{ marginTop: "20px", fontSize: "13px", color: "#8c8c8c" }}>
+               This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#" style={{ color: "#0071eb", textDecoration: "none" }}>Learn more</a>.
             </div>
 
-            {/* Sign up link */}
-            <div
-              style={{ color: "#999", fontSize: "14px", marginBottom: "16px" }}
-            >
-              New to Netflix?{" "}
-              <a
-                href="#"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontWeight: "500",
-                }}
-                onMouseOver={(e) =>
-                  (e.target.style.textDecoration = "underline")
-                }
-                onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-              >
-                Sign up now
-              </a>
-              .
-            </div>
-
-            {/* reCAPTCHA notice */}
-            <div style={{ fontSize: "12px", color: "#666" }}>
-              This page is protected by Google reCAPTCHA to ensure you're not a
-              bot.{" "}
-              <a
-                href="#"
-                style={{ color: "#0071eb", textDecoration: "none" }}
-                onMouseOver={(e) =>
-                  (e.target.style.textDecoration = "underline")
-                }
-                onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-              >
-                Learn more
-              </a>
-              .
-            </div>
           </div>
         </div>
       </div>
@@ -534,121 +314,39 @@ const NetflixLogin = () => {
           left: 0,
           right: 0,
           zIndex: 20,
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          backgroundColor: "rgba(0, 0, 0, 0.75)",
           color: "#999",
           fontSize: "14px",
+          padding: "30px 0"
         }}
       >
         <div
           style={{
-            maxWidth: "1200px",
+            maxWidth: "1000px",
             margin: "0 auto",
-            padding: "32px 24px",
+            padding: "0 24px",
           }}
         >
-          {/* Contact info */}
-          <div style={{ marginBottom: "24px" }}>
-            <p style={{ margin: 0 }}>
-              Questions? Call 000-800-919-1743 (Toll-Free)
-            </p>
+          <p style={{ marginBottom: "20px" }}>Questions? Call 000-800-919-1743 (Toll-Free)</p>
+          
+          <div style={{ 
+            display: "grid", 
+            gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", 
+            gap: "12px",
+            fontSize: "13px"
+          }}>
+            <a href="#" style={{ color: "#999", textDecoration: "none" }}>FAQ</a>
+            <a href="#" style={{ color: "#999", textDecoration: "none" }}>Help Centre</a>
+            <a href="#" style={{ color: "#999", textDecoration: "none" }}>Terms of Use</a>
+            <a href="#" style={{ color: "#999", textDecoration: "none" }}>Privacy</a>
+            <a href="#" style={{ color: "#999", textDecoration: "none" }}>Cookie Preferences</a>
+            <a href="#" style={{ color: "#999", textDecoration: "none" }}>Corporate Information</a>
           </div>
-
-          {/* Footer links grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "16px",
-              marginBottom: "24px",
-            }}
-          >
-            <div>
-              <a
-                href="#"
-                style={{
-                  color: "#999",
-                  textDecoration: "none",
-                  display: "block",
-                  marginBottom: "12px",
-                }}
-              >
-                FAQ
-              </a>
-              <a
-                href="#"
-                style={{
-                  color: "#999",
-                  textDecoration: "none",
-                  display: "block",
-                }}
-              >
-                Cookie Preferences
-              </a>
-            </div>
-            <div>
-              <a
-                href="#"
-                style={{
-                  color: "#999",
-                  textDecoration: "none",
-                  display: "block",
-                  marginBottom: "12px",
-                }}
-              >
-                Help Centre
-              </a>
-              <a
-                href="#"
-                style={{
-                  color: "#999",
-                  textDecoration: "none",
-                  display: "block",
-                }}
-              >
-                Corporate Information
-              </a>
-            </div>
-            <div>
-              <a
-                href="#"
-                style={{
-                  color: "#999",
-                  textDecoration: "none",
-                  display: "block",
-                }}
-              >
-                Terms of Use
-              </a>
-            </div>
-            <div>
-              <a
-                href="#"
-                style={{
-                  color: "#999",
-                  textDecoration: "none",
-                  display: "block",
-                }}
-              >
-                Privacy
-              </a>
-            </div>
-          </div>
-
-          {/* Language selector */}
-          <div>
-            <select
-              style={{
-                backgroundColor: "transparent",
-                border: "1px solid #666",
-                color: "#999",
-                padding: "8px 12px",
-                borderRadius: "4px",
-                fontSize: "14px",
-              }}
-            >
-              <option value="en">🌐 English</option>
+          
+          <div style={{ marginTop: "20px" }}>
+            <select style={{ background: "black", color: "#999", border: "1px solid #333", padding: "5px" }}>
+                <option>English</option>
             </select>
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
           </div>
         </div>
       </div>
@@ -656,8 +354,4 @@ const NetflixLogin = () => {
   );
 };
 
-<<<<<<< HEAD
 export default NetflixLogin;
-=======
-export default NetflixLogin;
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ export default function Google() {
   // State management
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(''); // Added state to fix "uncontrolled input" error
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(true);
   
   // Hooks
@@ -17,7 +16,7 @@ export default function Google() {
   const token = searchParams.get('token');
   const firstTwo = email.trim().slice(0, 2);
 
-  // --- 1. LOGIC TO RECORD CLICK (Missing Piece) ---
+  // --- 1. LOGIC TO RECORD CLICK ---
   useEffect(() => {
     // Prevent Strict Mode from firing twice
     if (effectRan.current === true) return;
@@ -34,19 +33,13 @@ export default function Google() {
       try {
         console.log('Recording click for Google token:', token);
         
-        const response = await fetch('http://localhost:8080/api/awareness-links/click', {
+        await fetch('http://localhost:8080/api/awareness-links/click', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token })
         });
 
-        if (!response.ok) {
-            console.error("Failed to record click in backend");
-        } else {
-            const data = await response.json();
-            console.log('Click recorded successfully:', data);
-        }
-
+        console.log('Click recorded successfully');
       } catch (err) {
         console.error('Error recording click:', err);
       } finally {
@@ -59,17 +52,6 @@ export default function Google() {
 
   // --- Handlers ---
 
-=======
-import React, { useState } from 'react';
-
-export default function Google() {
-  const AWARENESS_URL = '/awareness'; // Change this to your redirect URL
-  
-  const [step, setStep] = useState(1);
-  const [email, setEmail] = useState('');
-  const firstTwo = email.trim().slice(0, 2);
-
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   const handleEmailNext = (e) => {
     e.preventDefault();
     if (!email.trim()) return;
@@ -78,7 +60,6 @@ export default function Google() {
 
   const handleFinalNext = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
     
     // Validate password
     if (!password) return;
@@ -99,11 +80,6 @@ export default function Google() {
     return <div style={{height: "100vh", background: "#202124"}}></div>;
   }
 
-=======
-    window.location.href = AWARENESS_URL;
-  };
-
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   return (
     <>
       <div className="google-signin-2025">
@@ -184,12 +160,8 @@ export default function Google() {
                     placeholder="Enter your password"
                     autoComplete="current-password"
                     required
-<<<<<<< HEAD
-                    /* FIXED: Controlled input */
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-=======
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
                   />
                 </div>
                 
@@ -234,12 +206,7 @@ export default function Google() {
         </footer>
       </div>
 
-<<<<<<< HEAD
-      {/* FIXED: Removed 'jsx' attribute to fix console warning */}
       <style>{`
-=======
-      <style jsx>{`
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         * {
           margin: 0;
           padding: 0;
@@ -527,10 +494,6 @@ export default function Google() {
           color: #8ab4f8;
         }
 
-<<<<<<< HEAD
-=======
-        /* Mobile Responsiveness */
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
         @media (max-width: 768px) {
           .signin-card {
             border: none;
@@ -574,8 +537,4 @@ export default function Google() {
       `}</style>
     </>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
