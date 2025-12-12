@@ -37,7 +37,11 @@ createRoot(document.getElementById('root')).render(
             <Route path="contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
           </Route>
+<<<<<<< HEAD
           <Route path="/netflix" element={<NetflixLogin/>} />
+=======
+          <Route path="/netflix-login" element={<NetflixLogin/>} />
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
           <Route path="/facebook" element={<Facebook/>} />
           <Route path="/Instagram" element={<Instagram/>} />
           <Route path="/Google" element={<Google/>} />

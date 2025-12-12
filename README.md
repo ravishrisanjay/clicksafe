@@ -57,4 +57,7 @@ JWT-based authentication system:
 1. User selects a phishing template category (e.g., Bank, Social Media)
 2. Chooses a message template and fake login page
 3. Generates a custom shareable link like:
+<<<<<<< HEAD
 ...
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c

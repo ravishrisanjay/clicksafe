@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
@@ -87,6 +88,17 @@ export default function Facebook() {
     return <div style={{height: "100vh", background: "#f0f2f5"}}></div>;
   }
 
+=======
+import React from "react";
+
+export default function Facebook() {
+  const loginRedirectUrl = "/home"; // Change this as needed
+
+  const handleLogin = () => {
+    window.location.href = loginRedirectUrl;
+  };
+
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   return (
     <div style={styles.container}>
       <div style={styles.main}>
@@ -102,19 +114,26 @@ export default function Facebook() {
               type="text"
               placeholder="Email address or phone number"
               style={styles.input}
+<<<<<<< HEAD
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
             />
             <input
               type="password"
               placeholder="Password"
               style={styles.input}
+<<<<<<< HEAD
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
             />
             <button onClick={handleLogin} style={styles.loginBtn}>
               Log in
             </button>
+<<<<<<< HEAD
             <a 
               href="#" 
               style={styles.forgot} 
@@ -129,6 +148,13 @@ export default function Facebook() {
             >
               Create new account
             </button>
+=======
+            <a href="#" style={styles.forgot}>
+              Forgotten password?
+            </a>
+            <hr style={styles.hr} />
+            <button style={styles.createBtn}>Create new account</button>
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
           </div>
           <p style={styles.createPage}>
             <b>Create a Page</b> for a celebrity, brand or business.
@@ -158,7 +184,10 @@ const styles = {
     fontFamily: "Helvetica, Arial, sans-serif",
     backgroundColor: "#f0f2f5",
     padding: "0 10px",
+<<<<<<< HEAD
     minHeight: "100vh",
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   main: {
     display: "flex",
@@ -167,12 +196,18 @@ const styles = {
     alignItems: "center",
     minHeight: "80vh",
     flexWrap: "wrap",
+<<<<<<< HEAD
     paddingTop: "50px",
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   left: {
     maxWidth: "400px",
     margin: "20px",
+<<<<<<< HEAD
     paddingRight: "32px",
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   logo: {
     fontSize: "55px",
@@ -180,13 +215,19 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "10px",
     fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif",
+<<<<<<< HEAD
     marginTop: "0",
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   subtitle: {
     fontSize: "24px",
     color: "#1c1e21",
+<<<<<<< HEAD
     fontWeight: "normal",
     lineHeight: "32px",
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   right: {
     margin: "20px",
@@ -197,6 +238,7 @@ const styles = {
     backgroundColor: "#fff",
     padding: "20px",
     borderRadius: "8px",
+<<<<<<< HEAD
     boxShadow: "0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1)",
     display: "flex",
     flexDirection: "column",
@@ -208,66 +250,111 @@ const styles = {
     borderRadius: "6px",
     border: "1px solid #dddfe2",
     outline: "none",
+=======
+    boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+  },
+  input: {
+    padding: "12px",
+    fontSize: "16px",
+    borderRadius: "6px",
+    border: "1px solid #ddd",
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   loginBtn: {
     padding: "12px",
     backgroundColor: "#1877f2",
     color: "#fff",
     fontWeight: "bold",
+<<<<<<< HEAD
     fontSize: "20px",
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
     lineHeight: "28px",
+=======
+    fontSize: "16px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   forgot: {
     color: "#1877f2",
     textAlign: "center",
     textDecoration: "none",
     fontSize: "14px",
+<<<<<<< HEAD
     fontWeight: "500",
   },
   hr: {
     margin: "10px 0",
     border: "none",
     borderBottom: "1px solid #dadde1",
+=======
+  },
+  hr: {
+    margin: "10px 0",
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   createBtn: {
     padding: "12px",
     backgroundColor: "#42b72a",
     color: "#fff",
     fontWeight: "bold",
+<<<<<<< HEAD
     fontSize: "17px",
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
     width: "fit-content",
     margin: "0 auto",
+=======
+    fontSize: "16px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   createPage: {
     textAlign: "center",
     fontSize: "14px",
+<<<<<<< HEAD
     marginTop: "26px",
+=======
+    marginTop: "16px",
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   footer: {
     textAlign: "center",
     padding: "20px",
     fontSize: "12px",
     color: "#737373",
+<<<<<<< HEAD
     background: "#fff",
     marginTop: "auto",
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   languages: {
     marginBottom: "10px",
   },
   langBtn: {
     marginLeft: "5px",
+<<<<<<< HEAD
     padding: "0 8px",
     fontSize: "14px",
     cursor: "pointer",
     border: "1px solid #ccd0d5",
     background: "#f5f6f7",
     fontWeight: "bold",
+=======
+    padding: "2px 8px",
+    fontSize: "14px",
+    cursor: "pointer",
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
   },
   links: {
     margin: "10px 0",
@@ -276,4 +363,8 @@ const styles = {
   copy: {
     marginTop: "10px",
   },
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c

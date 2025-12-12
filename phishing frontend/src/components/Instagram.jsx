@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import instapic from '../assets/instapic.png';
@@ -74,6 +75,13 @@ export default function Instagram() {
   if (loading) {
     return <div style={{height: "100vh", background: "#000"}}></div>;
   }
+=======
+import React from 'react'
+import instapic from '../assets/instapic.png'
+export default function Instagram() {
+  // Put your image location here
+
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 
   return (
     <div className="container">
@@ -87,6 +95,7 @@ export default function Instagram() {
           <div className="login-box">
             <h1 className="logo">Instagram</h1>
 
+<<<<<<< HEAD
             {/* Login Form */}
             <form onSubmit={(e) => { e.preventDefault(); handleAction('login'); }}>
               <input
@@ -110,6 +119,24 @@ export default function Instagram() {
 
               <button type="submit" className="login-btn">Log in</button>
             </form>
+=======
+            <input
+              type="text"
+              placeholder="Phone number, username, or email"
+              className="input"
+            />
+
+            <div className="password-box">
+              <input
+                type="password"
+                placeholder="Password"
+                className="input"
+              />
+              <span className="show">Show</span>
+            </div>
+
+            <button className="login-btn">Log in</button>
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 
             <div className="or">
               <div className="line"></div>
@@ -117,6 +144,7 @@ export default function Instagram() {
               <div className="line"></div>
             </div>
 
+<<<<<<< HEAD
             <button 
               className="facebook-btn" 
               onClick={() => handleAction('facebook')}
@@ -131,17 +159,26 @@ export default function Instagram() {
             >
               Forgot password?
             </a>
+=======
+            <button className="facebook-btn">Log in with Facebook</button>
+
+            <a href="#" className="forgot">Forgot password?</a>
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
           </div>
 
           {/* Sign up section */}
           <div className="signup-box">
             <span>Don’t have an account?</span>
+<<<<<<< HEAD
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); handleAction('signup'); }}
             >
               Sign up
             </a>
+=======
+            <a href="#">Sign up</a>
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
           </div>
 
           {/* Footer */}
@@ -152,11 +189,19 @@ export default function Instagram() {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   );
+=======
+  )
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 }
 
 /* CSS in the same file */
 const css = `
+<<<<<<< HEAD
+=======
+
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 html, body {
   margin: 0;
   padding: 0;
@@ -190,6 +235,10 @@ html, body {
   }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 .container {
   display: flex;
   justify-content: center;
@@ -198,6 +247,10 @@ html, body {
   background: #000;
   font-family: Arial, sans-serif;
   color: #fff;
+<<<<<<< HEAD
+=======
+
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 }
 .wrapper {
   display: flex;
@@ -222,10 +275,18 @@ html, body {
 }
 .login-box {
   background: #000;
+<<<<<<< HEAD
   border: none;
   padding: 40px;
   width: 100%;
 }
+=======
+  border: none;         /* Remove border */
+  padding: 40px;
+  width: 100%;
+}
+
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 .logo {
   text-align: center;
   font-size: 48px;
@@ -294,7 +355,10 @@ html, body {
   font-size: 12px;
   color: #0095f6;
   margin-top: 10px;
+<<<<<<< HEAD
   cursor: pointer;
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 }
 .signup-box {
   border: 1px solid #262626;
@@ -303,13 +367,19 @@ html, body {
   margin-top: 20px;
   text-align: center;
   font-size: 14px;
+<<<<<<< HEAD
   width: 100%;
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 }
 .signup-box a {
   color: #0095f6;
   font-weight: bold;
   margin-left: 5px;
+<<<<<<< HEAD
   cursor: pointer;
+=======
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
 }
 .footer {
   margin-top: 30px;
@@ -324,4 +394,8 @@ if (typeof document !== 'undefined') {
   const style = document.createElement('style');
   style.innerHTML = css;
   document.head.appendChild(style);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d322129cfddd84fc63e21138ac62fcba14f8bc2c
