@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AwarenessLinkService from './AwarenessLinkService';
+import AwarenessLinkService from '../services/AwarenessLinkService';
 
 export default function LinkManager() {
   const [links, setLinks] = useState([]);
@@ -36,7 +36,7 @@ export default function LinkManager() {
     });
   };
 
-  const shareViaEmail = (linkUrl, platform) => {
+  const shareViaEmail = (linkUrl) => {
     const subject = encodeURIComponent('🛡️ Test Your Cybersecurity Skills!');
     const body = encodeURIComponent(
       `Hi! I've been learning about cybersecurity and wanted to share this educational simulation with you.\n\nClick here to test your ability to spot phishing attempts: ${linkUrl}\n\nThis is a safe, educational tool designed to help people recognize online scams.\n\nStay safe online!`
@@ -47,16 +47,22 @@ export default function LinkManager() {
   const getStatusBadge = (link) => {
     const now = new Date();
     const expiryDate = new Date(link.expiresAt);
-    
-    if (!link.isActive) {
-      return <span style={styles.expiredBadge}>❌ Expired</span>;
-    } else if (now > expiryDate) {
-      return <span style={styles.expiredBadge}>⏰ Time Expired</span>;
-    } else if (link.currentClicks >= link.maxClicks) {
-      return <span style={styles.expiredBadge}>✋ Max Clicks Reached</span>;
-    } else {
-      return <span style={styles.activeBadge}>✅ Active</span>;
+    const isExpired = !link.isActive || now > expiryDate || link.currentClicks >= link.maxClicks;
+
+    if (isExpired) {
+      return (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-red-500/10 text-red-400 border border-red-500/20">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+          Expired
+        </span>
+      );
     }
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-glow">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        Active
+      </span>
+    );
   };
 
   const getPlatformIcon = (platform) => {
@@ -67,98 +73,116 @@ export default function LinkManager() {
       'amazon': '📦',
       'google': '🌐'
     };
-    return icons[platform.toLowerCase()] || '🔗';
+    return icons[platform?.toLowerCase()] || '🔗';
   };
 
   if (loading) {
     return (
-      <div style={styles.container}>
-        <div style={styles.loading}>
-          <h3>Loading your links... ⏳</h3>
-        </div>
+      <div className="flex flex-col items-center justify-center p-12 text-slate-400">
+        <div className="w-10 h-10 border-4 border-brand-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p>Loading your campaigns...</p>
       </div>
     );
   }
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <h2 style={styles.title}>📊 Your Generated Awareness Links</h2>
-        <button style={styles.refreshButton} onClick={fetchUserLinks}>
-          🔄 Refresh
+    <div className="space-y-6">
+      
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-cyber-900/50 p-6 rounded-2xl border border-cyber-700 backdrop-blur-md">
+        <div>
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <span className="text-2xl">📊</span> Campaign Manager
+          </h2>
+          <p className="text-slate-400 text-sm mt-1">Track and manage your active simulations.</p>
+        </div>
+        <button 
+          onClick={fetchUserLinks}
+          className="px-4 py-2 bg-cyber-800 hover:bg-cyber-700 text-white rounded-lg border border-cyber-600 transition-all text-sm font-medium flex items-center gap-2"
+        >
+          <span>🔄</span> Refresh Data
         </button>
       </div>
 
       {error && (
-        <div style={styles.error}>
-          <p>{error}</p>
+        <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-200 rounded-xl text-sm flex items-center gap-2">
+          <span>⚠️</span> {error}
         </div>
       )}
 
+      {/* Grid Content */}
       {links.length === 0 ? (
-        <div style={styles.emptyState}>
-          <h3>🔗 No links generated yet</h3>
-          <p>Create your first awareness link in the simulation section to get started!</p>
+        <div className="text-center py-16 bg-cyber-800/20 rounded-2xl border-2 border-dashed border-cyber-700">
+          <div className="text-5xl mb-4 opacity-50">🔗</div>
+          <h3 className="text-xl font-bold text-white mb-2">No Links Generated Yet</h3>
+          <p className="text-slate-400 mb-6">Create your first simulation to start tracking results.</p>
         </div>
       ) : (
-        <div style={styles.linksGrid}>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {links.map((link) => (
-            <div key={link.id} style={styles.linkCard}>
-              <div style={styles.linkHeader}>
-                <div style={styles.platformInfo}>
-                  <span style={styles.platformIcon}>
+            <div key={link.id} className="bg-cyber-900/80 backdrop-blur-sm border border-cyber-700 rounded-xl p-5 hover:border-brand-500/30 transition-all group">
+              
+              {/* Card Header */}
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-cyber-800 rounded-lg flex items-center justify-center text-xl border border-cyber-600">
                     {getPlatformIcon(link.platformType)}
-                  </span>
-                  <span style={styles.platformName}>
-                    {link.platformType.charAt(0).toUpperCase() + link.platformType.slice(1)}
-                  </span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white capitalize">{link.platformType}</h3>
+                    <p className="text-xs text-slate-500">ID: {link.id.toString().slice(-4)}</p>
+                  </div>
                 </div>
                 {getStatusBadge(link)}
               </div>
 
-              <div style={styles.linkUrl}>
+              {/* URL Input */}
+              <div className="mb-4 relative">
                 <input
                   type="text"
                   value={`http://localhost:8080/awareness/${link.token}`}
                   readOnly
-                  style={styles.urlInput}
+                  className="w-full bg-cyber-950 border border-cyber-700 rounded-lg py-2 px-3 text-xs text-slate-400 font-mono focus:border-brand-500 focus:text-brand-400 outline-none transition-colors cursor-pointer"
                   onClick={(e) => e.target.select()}
                 />
               </div>
 
-              <div style={styles.linkStats}>
-                <div style={styles.stat}>
-                  <span style={styles.statLabel}>Clicks:</span>
-                  <span style={styles.statValue}>{link.currentClicks}/{link.maxClicks}</span>
+              {/* Stats Grid */}
+              <div className="grid grid-cols-3 gap-2 mb-4 text-center">
+                <div className="bg-cyber-800/50 p-2 rounded-lg">
+                  <div className="text-xs text-slate-500">Clicks</div>
+                  <div className="font-bold text-white">{link.currentClicks}/{link.maxClicks}</div>
                 </div>
-                <div style={styles.stat}>
-                  <span style={styles.statLabel}>Created:</span>
-                  <span style={styles.statValue}>
-                    {new Date(link.createdAt).toLocaleDateString()}
-                  </span>
+                <div className="bg-cyber-800/50 p-2 rounded-lg">
+                  <div className="text-xs text-slate-500">Created</div>
+                  <div className="font-bold text-white text-xs py-1">
+                    {new Date(link.createdAt).toLocaleDateString(undefined, {month:'short', day:'numeric'})}
+                  </div>
                 </div>
-                <div style={styles.stat}>
-                  <span style={styles.statLabel}>Expires:</span>
-                  <span style={styles.statValue}>
-                    {new Date(link.expiresAt).toLocaleDateString()}
-                  </span>
+                <div className="bg-cyber-800/50 p-2 rounded-lg">
+                  <div className="text-xs text-slate-500">Expires</div>
+                  <div className="font-bold text-white text-xs py-1">
+                    {new Date(link.expiresAt).toLocaleDateString(undefined, {month:'short', day:'numeric'})}
+                  </div>
                 </div>
               </div>
 
-              <div style={styles.linkActions}>
+              {/* Action Buttons */}
+              <div className="flex gap-2">
                 <button
-                  style={styles.actionButton}
                   onClick={() => copyToClipboard(`http://localhost:8080/awareness/${link.token}`)}
+                  className="flex-1 py-2 bg-brand-600 hover:bg-brand-500 text-white text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
-                  📋 Copy
+                  <span>📋</span> Copy
                 </button>
                 <button
-                  style={styles.actionButton}
-                  onClick={() => shareViaEmail(`http://localhost:8080/awareness/${link.token}`, link.platformType)}
+                  onClick={() => shareViaEmail(`http://localhost:8080/awareness/${link.token}`)}
+                  className="flex-1 py-2 bg-cyber-700 hover:bg-cyber-600 text-white text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 border border-cyber-600"
                 >
-                  📧 Share
+                  <span>📧</span> Share
                 </button>
               </div>
+
             </div>
           ))}
         </div>
@@ -166,135 +190,3 @@ export default function LinkManager() {
     </div>
   );
 }
-
-const styles = {
-  container: {
-    maxWidth: '1000px',
-    margin: '0 auto',
-    padding: '2rem',
-    fontFamily: 'Arial, sans-serif',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '2rem',
-  },
-  title: {
-    color: '#333',
-    margin: 0,
-  },
-  refreshButton: {
-    padding: '0.5rem 1rem',
-    backgroundColor: '#007bff',
-    color: 'white',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-  },
-  loading: {
-    textAlign: 'center',
-    padding: '3rem',
-    color: '#666',
-  },
-  error: {
-    backgroundColor: '#f8d7da',
-    color: '#721c24',
-    padding: '1rem',
-    borderRadius: '6px',
-    marginBottom: '2rem',
-  },
-  emptyState: {
-    textAlign: 'center',
-    padding: '3rem',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '12px',
-    color: '#666',
-  },
-  linksGrid: {
-    display: 'grid',
-    gap: '1.5rem',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-  },
-  linkCard: {
-    backgroundColor: 'white',
-    border: '1px solid #e9ecef',
-    borderRadius: '12px',
-    padding: '1.5rem',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-  },
-  linkHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '1rem',
-  },
-  platformInfo: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-  },
-  platformIcon: {
-    fontSize: '1.5rem',
-  },
-  platformName: {
-    fontSize: '1.1rem',
-    fontWeight: '600',
-  },
-  activeBadge: {
-    color: '#28a745',
-    fontWeight: '600',
-    fontSize: '0.9rem',
-  },
-  expiredBadge: {
-    color: '#dc3545',
-    fontWeight: '600',
-    fontSize: '0.9rem',
-  },
-  linkUrl: {
-    marginBottom: '1rem',
-  },
-  urlInput: {
-    width: '100%',
-    padding: '0.75rem',
-    border: '1px solid #ced4da',
-    borderRadius: '6px',
-    fontSize: '0.9rem',
-    fontFamily: 'monospace',
-    backgroundColor: '#f8f9fa',
-  },
-  linkStats: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '0.5rem',
-    marginBottom: '1rem',
-    fontSize: '0.9rem',
-  },
-  stat: {
-    textAlign: 'center',
-  },
-  statLabel: {
-    display: 'block',
-    color: '#666',
-    fontSize: '0.8rem',
-  },
-  statValue: {
-    display: 'block',
-    fontWeight: '600',
-    color: '#333',
-  },
-  linkActions: {
-    display: 'flex',
-    gap: '0.5rem',
-  },
-  actionButton: {
-    flex: 1,
-    padding: '0.5rem',
-    backgroundColor: '#6c757d',
-    color: 'white',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-    fontSize: '0.9rem',
-  },
-};
