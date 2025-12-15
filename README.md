@@ -1,60 +1,87 @@
-# 🛡️ Phishing Awareness Simulator - ClickSafe
+# 🛡️ ClickSafe - Enterprise Phishing Defense Platform
 
-> An ethical web-based phishing simulation platform to raise cybersecurity awareness through realistic but safe phishing scenarios.
+> **AI-Powered Cybersecurity Awareness & Simulation Hub** > *Democratizing digital safety through interactive education, realistic simulations, and advanced threat detection.*
+
+![Project Status](https://img.shields.io/badge/Status-Active-success)
+![Tech Stack](https://img.shields.io/badge/Stack-Full%20Stack-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
 ## 📖 Overview
 
-Phishing Awareness Simulator is a full-stack application built to **educate users about phishing attacks** through ethical simulations. Users can create fake login links and pair them with SMS/Email message templates, then observe how many people click those links — **without collecting any sensitive data**.
+**ClickSafe** is a sophisticated, full-stack cybersecurity platform designed to educate users about the dangers of phishing through **safe, ethical simulations** and **gamified learning**. 
 
-The goal is to teach people how phishing works, how attackers exploit trust, and how to recognize such scams in real life.
+Unlike traditional training tools, ClickSafe combines a **Premium Glassmorphism UI** with a powerful **Spring Boot Backend** and an **AI-based Phishing Detector** to provide a complete defense ecosystem. Users can test their skills against realistic fake login pages, learn from interactive modules, and even analyze suspicious text messages in real-time.
 
----
-
-## 🎯 Key Features
-
-- ✅ **Simulate Phishing Attacks** via SMS and Email templates
-- ✅ **Generate fake login links** (e.g., Facebook, Instagram, Amazon)
-- ✅ **Track how many people click** the generated links
-- ✅ **No credentials collected** — purely for awareness
-- ✅ **User profile dashboard** showing stats (links created & clicked)
-- ✅ **Awareness redirect page** warns users after clicking links
+**Mission:** To empower digital citizens with the knowledge to recognize, avoid, and report cyber threats.
 
 ---
 
-## 🧠 Architecture
+## ✨ Key Features
 
-### 🔧 Backend (Spring Boot)
+### 🧠 AI & Detection
+- **🤖 Phishing AI Detector:** A heuristic analysis engine that scans messages for urgency, suspicious links, and common fraud patterns to give a safety verdict.
+- **🛡️ Real-time Threat Analysis:** Instant feedback on potential threats.
 
-- `User`: Stores login credentials (JWT-secured)
-- `UserProfile`: Stores name, email, linksCreated, linksClicked
-- `AuthController`: Handles login/signup via JWT
-- `UserController`: Handles profile management
-- `SimulationController`: Tracks phishing link clicks
+### 🎭 Simulation Engine
+- **Ethical Phishing Campaigns:** Generate safe, trackable links that mimic popular platforms (Netflix, Facebook, Amazon, etc.).
+- **Safe Environment:** If a user clicks a simulation link, they are redirected to a friendly "Awareness Page" that explains what they missed—**no credentials are ever stored**.
+- **Interactive Demos:** Live previews of how attacks look on Mobile vs. Desktop.
 
-### 🌐 Frontend (React.js)
+### 🎓 Educational Hub
+- **Gamified Learning:** Complete modules on "Psychology of Attacks," "Red Flags," and more.
+- **Progress Tracking:** Earn badges and track completion status via a persistent sidebar.
+- **Interactive Quizzes:** Test knowledge with instant feedback.
 
-- **Login/Register UI**
-- **Attack Simulation Page** (SMS, Email, Login Pages)
-- **Fake Login Page Preview in iframe**
-- **Profile Analytics Dashboard**
-- **Awareness Page** for victims
+### 📊 Analytics & Dashboard
+- **Campaign Manager:** Track active links, click-through rates, and expiration statuses.
+- **Visual Reports:** Beautiful charts showing engagement and vulnerability statistics.
+- **User Profiles:** Manage personal stats and campaign history.
 
----
-
-## 🔐 Authentication
-
-JWT-based authentication system:
-- On login, JWT is issued and stored in `localStorage`
-- Every protected route/API checks for the JWT
-- Secure user-specific link tracking
+### 🚨 Victim Support
+- **Incident Response Center:** Actionable guides for Financial Fraud, Social Media Hacks, and Sextortion.
+- **Emergency Contacts:** Direct links to national cybercrime helplines (1930) and portals.
 
 ---
 
-## 🧪 Simulation Flow
+## 🛠️ Tech Stack
 
-1. User selects a phishing template category (e.g., Bank, Social Media)
-2. Chooses a message template and fake login page
-3. Generates a custom shareable link like:
-...
+### **Frontend (The Experience)**
+- **Framework:** React.js (Vite)
+- **Styling:** Tailwind CSS (Custom "Cyber Security" Dark Theme)
+- **UI Components:** Glassmorphism design, Lucide React Icons
+- **Visualization:** Recharts for analytics data
+- **State Management:** React Context API
+
+### **Backend (The Engine)**
+- **Framework:** Java Spring Boot
+- **Security:** Spring Security with JWT (JSON Web Token) Auth
+- **Database:** MySQL with Hibernate/JPA
+- **Architecture:** RESTful API with Service Layer pattern
+
+---
+
+## 📸 Screenshots
+
+| **Premium Dashboard** | **AI Detector** |
+|:---:|:---:|
+| *(Add screenshot of Home/Dashboard)* | *(Add screenshot of Detector)* |
+
+| **Attack Simulation** | **Educational Hub** |
+|:---:|:---:|
+| *(Add screenshot of Simulation Page)* | *(Add screenshot of Learn Page)* |
+
+---
+
+## 🚀 Installation & Setup
+
+### Prerequisites
+- **Node.js** (v16+)
+- **Java JDK** (17 or 21)
+- **MySQL Database**
+
+### 1️⃣ Database Setup
+Create a MySQL database named `clicksafe_db`:
+```sql
+CREATE DATABASE clicksafe_db;
