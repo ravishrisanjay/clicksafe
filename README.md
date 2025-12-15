@@ -62,18 +62,6 @@ Unlike traditional training tools, ClickSafe combines a **Premium Glassmorphism 
 
 ---
 
-## 📸 Screenshots
-
-| **Premium Dashboard** | **AI Detector** |
-|:---:|:---:|
-| *(Add screenshot of Home/Dashboard)* | *(Add screenshot of Detector)* |
-
-| **Attack Simulation** | **Educational Hub** |
-|:---:|:---:|
-| *(Add screenshot of Simulation Page)* | *(Add screenshot of Learn Page)* |
-
----
-
 ## 🚀 Installation & Setup
 
 ### Prerequisites
